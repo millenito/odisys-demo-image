@@ -11,6 +11,8 @@ docker run -d --name <nama_container> -p <port_host>:80 -p <port_host>:9053 <nam
 
 docker run -d --name odi -p 80:80 -p 9053:9053 app-php70:nginx
 
+docker run -d --name php7apache -p 8080:80 -v "$P7":/var/www/html php7apache
+
 4. kalau ingin masuk ke containernya untuk di setting2 lagi bisa dengan:
 
 docker exec -it <nama_container> bash

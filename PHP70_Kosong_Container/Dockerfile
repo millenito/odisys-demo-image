@@ -1,8 +1,11 @@
 FROM ubuntu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=Asia/Jakarta
 
-RUN apt-get update && apt-get upgrade \
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get upgrade -y \
     && apt-get install -y software-properties-common \
     && add-apt-repository ppa:ondrej/php \
     && apt-get update \
