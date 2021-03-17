@@ -19,6 +19,7 @@ RUN apt-get update && apt-get upgrade -y \
     php7.3-pgsql \
     php7.3-mysql \
     php7.3-gd \
+    php7.3-curl \
     php7.3-dev \
     php7.3-xml \
     php-pear \
