@@ -40,7 +40,7 @@ RUN echo "instantclient,/opt/oracle/instantclient_12_1" | pecl install oci8-2.0.
     && rm -f /opt/oracle/*.zip
 
 # apache
-RUN a2enmod header
+#RUN a2enmod header
 
 RUN echo "xdebug.remote_enable=on" >> /etc/php5/conf.d/xdebug.ini \
         && echo "xdebug.remote_handler=dbgp" >> /etc/php5/conf.d/xdebug.ini \
