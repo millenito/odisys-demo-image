@@ -22,6 +22,7 @@ RUN apt-get update && apt-get upgrade -y \
     php7.3-curl \
     php7.3-dev \
     php7.3-xml \
+    php7.0-xml \
     php-pear \
     && apt-get clean
 
@@ -47,7 +48,7 @@ RUN echo /opt/oracle/instantclient_18_5 > /etc/ld.so.conf.d/oracle-instantclient
     && ldconfig
 
 # install oci8
-RUN echo "instantclient,/opt/oracle/instantclient_18_5" | pecl install oci8 \
+RUN echo "instantclient,/opt/oracle/instantclient_18_5" | pecl install oci8-2.2.0 \
     && echo "extension = oci8.so" >> /etc/php/7.3/apache2/php.ini \
     && echo "extension = oci8.so" >> /etc/php/7.3/cli/php.ini \
     && service apache2 restart \
