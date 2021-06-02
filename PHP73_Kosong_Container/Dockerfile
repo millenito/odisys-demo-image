@@ -16,14 +16,14 @@ RUN apt-get update && apt-get upgrade -y \
     wget \
     unzip \
     libaio1 \
-    php7.0 \
-    php7.0-pgsql \
-    php7.0-mysql \
-    php7.0-gd \
-    php7.0-curl \
-    php7.0-dev \
+    php7.3 \
+    php7.3-pgsql \
+    php7.3-mysql \
+    php7.3-gd \
+    php7.3-curl \
+    php7.3-dev \
+    php7.3-xml \
     php7.0-xml \
-    php-xml \
     php-pear \
     && apt-get clean
 
@@ -50,12 +50,17 @@ RUN echo /opt/oracle/instantclient_18_5 > /etc/ld.so.conf.d/oracle-instantclient
 
 # install oci8
 RUN echo "instantclient,/opt/oracle/instantclient_18_5" | pecl install oci8-2.2.0 \
-    && echo "extension = oci8.so" >> /etc/php/7.0/apache2/php.ini \
-    && echo "extension = oci8.so" >> /etc/php/7.0/cli/php.ini \
+    && echo "extension = oci8.so" >> /etc/php/7.3/apache2/php.ini \
+    && echo "extension = oci8.so" >> /etc/php/7.3/cli/php.ini \
     && service apache2 restart \
     && echo "/opt/oracle/instantclient_18_5" >> /etc/ld.so.conf.d/x86_64-linux-gnu.conf \
     && ldconfig \
     && rm -f /opt/oracle/*.zip
+
+# Install phpredis
+#RUN pecl install redis \
+    #&& echo "extension=redis.so" >> /etc/php/7.3/apache2/php.ini \
+    #&& service apache2 restart
 
 EXPOSE 80
 CMD apachectl -D FOREGROUND
