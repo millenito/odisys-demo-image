@@ -24,6 +24,7 @@ RUN apt-get update && apt-get upgrade -y \
     php7.3-dev \
     php7.3-xml \
     php7.0-xml \
+    php-xml \
     php-pear \
     && apt-get clean
 
