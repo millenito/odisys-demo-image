@@ -1,5 +1,7 @@
 FROM bylexus/apache-php53
 
+RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+
 RUN apt-get update && apt-get install -y \
         php5-gd \
         php5-dev \
