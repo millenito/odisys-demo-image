@@ -1,9 +1,18 @@
-FROM bylexus/apache-php53
+FROM ubuntu:12.04
+
+VOLUME ["/var/www"]
 
 RUN sed -i -e 's/archive.ubuntu.com\|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -y \
+	apache2\
+	php5 \
+	php5-cli\
+	libapache2-mod-php5 \
         php5-gd \
+	php5-ldap \
+        php5-mysql \
+        php5-pgsql \
         php5-dev \
         php5-curl \
         php5-xdebug \
@@ -15,7 +24,7 @@ RUN apt-get update && apt-get install -y \
         wget \
         unzip \
         && apt-get clean
-
+      
 # download & unzip instantclient12.1
 RUN mkdir /opt/oracle \
     && cd /opt/oracle \
@@ -42,7 +51,8 @@ RUN echo "instantclient,/opt/oracle/instantclient_12_1" | pecl install oci8-2.0.
     && rm -f /opt/oracle/*.zip
 
 # apache
-#RUN a2enmod header
+COPY apache_default /etc/apache2/sites-available/default
+RUN a2enmod rewrite
 
 RUN echo "xdebug.remote_enable=on" >> /etc/php5/conf.d/xdebug.ini \
         && echo "xdebug.remote_handler=dbgp" >> /etc/php5/conf.d/xdebug.ini \
