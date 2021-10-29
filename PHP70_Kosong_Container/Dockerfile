@@ -22,6 +22,7 @@ RUN apt-get update && apt-get upgrade -y \
     php7.0-gd \
     php7.0-curl \
     php7.0-dev \
+    php7.0-zip \
     php7.0-xml \
     php-xml \
     php-pear \
